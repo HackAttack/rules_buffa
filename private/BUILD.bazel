@@ -1,31 +1,11 @@
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
-load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_test")
 load("//private:buffa.bzl", "rust_buffa_toolchain")
-
-rust_binary(
-    name = "codegen",
-    srcs = ["codegen.rs"],
-    edition = "2021",
-    visibility = ["//visibility:public"],
-    deps = [
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:buffa-codegen",
-    ],
-)
-
-exports_files(["codegen.rs"])
-
-rust_test(
-    name = "codegen_test",
-    crate = ":codegen",
-    edition = "2021",
-)
 
 # `arbitrary` and `serde` are named by the code `arbitrary=true` and
 # `json=true` generate.
 rust_buffa_toolchain(
     name = "default_buffa_toolchain_impl",
-    codegen = ":codegen",
+    codegen = "//:codegen",
     runtime = [
         "//private/3rdparty/crates:arbitrary",
         "//private/3rdparty/crates:buffa",
@@ -35,28 +15,9 @@ rust_buffa_toolchain(
     ],
 )
 
-rust_binary(
-    name = "connect_codegen",
-    srcs = ["codegen.rs"],
-    crate_features = ["connect"],
-    edition = "2021",
-    visibility = ["//visibility:public"],
-    deps = [
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:buffa-codegen",
-        "//private/3rdparty/crates:connectrpc-codegen",
-    ],
-)
-
-rust_test(
-    name = "connect_codegen_test",
-    crate = ":connect_codegen",
-    edition = "2021",
-)
-
 rust_buffa_toolchain(
     name = "connect_buffa_toolchain_impl",
-    codegen = ":connect_codegen",
+    codegen = "//:connect_codegen",
     runtime = [
         "//private/3rdparty/crates:arbitrary",
         "//private/3rdparty/crates:buffa",

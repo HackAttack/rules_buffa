@@ -23,8 +23,8 @@ rust_library_group(
     name = "helloworld_rs_buffa_deps",
     deps = [
         ":helloworld_rs_buffa",
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:connectrpc",
+        "//:buffa",
+        "//:connectrpc",
         "//private/3rdparty/crates:futures",
     ],
 )

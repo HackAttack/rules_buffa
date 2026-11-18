@@ -41,15 +41,22 @@ The `buffa_srcs` output group on `rust_buffa_library` exposes the generated
 crate roots, so other tooling, e.g. a Cargo `build.rs`, can consume the exact
 source Bazel compiles.
 
+Code that uses crates generated with the default toolchain must depend on
+this module's runtime crates rather than its own copies, so the types and
+traits match: `@rules_buffa//:buffa`, `:buffa-types`, `:buffa-descriptor`,
+`:connectrpc`, `:serde`, `:arbitrary`, `:jiff`, and `:chrono`.
+
 For additional information about Bazel toolchains, see [here](https://docs.bazel.build/versions/master/toolchains.html).
 
 #### <a name="custom-buffa-deps">Customizing `buffa` Dependencies
 
 The default toolchain uses the [`buffa`], [`buffa-types`], [`buffa-descriptor`], and
 [`buffa-codegen`] crates vendored by this module. To use different versions, build the
-codegen binary from the source exported by this module and declare a
+codegen binary from `@rules_buffa//:codegen.rs` and declare a
 `rust_buffa_toolchain` with your own crates (e.g. from a
 [crate_universe](https://bazelbuild.github.io/rules_rust/crate_universe.html) repository).
+If your runtime crates are the same buffa version as this module's
+`buffa-codegen` (0.9.2), `codegen = "@rules_buffa//:codegen"` also works.
 
 [`buffa`]: https://crates.io/crates/buffa
 [`buffa-types`]: https://crates.io/crates/buffa-types
@@ -62,7 +69,7 @@ load("@rules_buffa//:defs.bzl", "rust_buffa_toolchain")
 
 rust_binary(
     name = "codegen",
-    srcs = ["@rules_buffa//private:codegen.rs"],
+    srcs = ["@rules_buffa//:codegen.rs"],
     edition = "2021",
     deps = [
         "@crates//:buffa",
@@ -219,7 +226,7 @@ exported source with the `connect` crate feature and add `connectrpc-codegen`:
 ```python
 rust_binary(
     name = "connect_codegen",
-    srcs = ["@rules_buffa//private:codegen.rs"],
+    srcs = ["@rules_buffa//:codegen.rs"],
     crate_features = ["connect"],
     edition = "2021",
     deps = [

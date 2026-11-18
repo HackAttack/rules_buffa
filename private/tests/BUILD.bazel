@@ -61,20 +61,20 @@ rust_test(
         ":a_rs_buffa",
         ":b_rs_buffa",
         ":c_rs_buffa",
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:buffa-types",
+        "//:buffa",
+        "//:buffa-types",
     ],
 )
 
 rust_buffa_toolchain(
     name = "json_toolchain_impl",
-    codegen = "//private:codegen",
+    codegen = "//:codegen",
     opts = ["json=true"],
     runtime = [
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:buffa-descriptor",
-        "//private/3rdparty/crates:buffa-types",
-        "//private/3rdparty/crates:serde",
+        "//:buffa",
+        "//:buffa-descriptor",
+        "//:buffa-types",
+        "//:serde",
     ],
 )
 
@@ -91,7 +91,7 @@ rust_library_group(
     name = "a_rs_buffa_json_deps",
     deps = [
         ":a_rs_buffa",
-        "//private/3rdparty/crates:buffa",
+        "//:buffa",
     ],
 )
 
@@ -125,7 +125,7 @@ rust_buffa_transform(
         "gate_impls=true",
         "json=true",
     ],
-    deps = ["//private/3rdparty/crates:serde"],
+    deps = ["//:serde"],
 )
 
 proto_library(
@@ -159,7 +159,7 @@ rust_test(
     deps = [
         ":d_rs_buffa",
         ":e_rs_buffa",
-        "//private/3rdparty/crates:buffa",
+        "//:buffa",
     ],
 )
 
@@ -200,8 +200,8 @@ rust_test(
     edition = "2021",
     deps = [
         ":stamped_rs_buffa",
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:buffa-types",
+        "//:buffa",
+        "//:buffa-types",
     ],
 )
 
@@ -239,7 +239,7 @@ rust_test(
     deps = [
         ":a_rs_buffa",
         ":importer_rs_buffa",
-        "//private/3rdparty/crates:buffa",
+        "//:buffa",
     ],
 )
 
@@ -274,7 +274,7 @@ rust_test(
     edition = "2021",
     deps = [
         ":pool_rs_buffa",
-        "//private/3rdparty/crates:buffa",
+        "//:buffa",
     ],
 )
 
@@ -317,6 +317,6 @@ rust_test(
     deps = [
         ":prefix_user_rs_buffa",
         ":prefixed_rs_buffa",
-        "//private/3rdparty/crates:buffa",
+        "//:buffa",
     ],
 )

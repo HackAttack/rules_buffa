@@ -36,7 +36,7 @@ rust_test(
     edition = "2021",
     deps = [
         ":well_known_types_rs_proto",
-        "//private/3rdparty/crates:buffa-descriptor",
-        "//private/3rdparty/crates:buffa-types",
+        "//:buffa-descriptor",
+        "//:buffa-types",
     ],
 )

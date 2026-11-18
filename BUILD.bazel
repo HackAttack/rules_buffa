@@ -1,8 +1,10 @@
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_test")
 
 package(default_visibility = ["//visibility:public"])
 
 exports_files([
+    "codegen.rs",
     "defs.bzl",
     "MODULE.bazel",
 ])
@@ -21,6 +23,85 @@ toolchain(
     name = "connect_buffa_toolchain",
     toolchain = "//private:connect_buffa_toolchain_impl",
     toolchain_type = ":toolchain_type",
+)
+
+# The generator the bundled toolchains run. A custom toolchain can use it as is,
+# or build `codegen.rs` against its own buffa crates.
+rust_binary(
+    name = "codegen",
+    srcs = ["codegen.rs"],
+    edition = "2021",
+    deps = [
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:buffa-codegen",
+    ],
+)
+
+rust_test(
+    name = "codegen_test",
+    crate = ":codegen",
+    edition = "2021",
+)
+
+rust_binary(
+    name = "connect_codegen",
+    srcs = ["codegen.rs"],
+    crate_features = ["connect"],
+    edition = "2021",
+    deps = [
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:buffa-codegen",
+        "//private/3rdparty/crates:connectrpc-codegen",
+    ],
+)
+
+rust_test(
+    name = "connect_codegen_test",
+    crate = ":connect_codegen",
+    edition = "2021",
+)
+
+# The default toolchain's runtime crates. Code that uses crates generated
+# with the default toolchain needs these, not its own copies, to share their
+# types and traits.
+alias(
+    name = "arbitrary",
+    actual = "//private/3rdparty/crates:arbitrary",
+)
+
+alias(
+    name = "buffa",
+    actual = "//private/3rdparty/crates:buffa",
+)
+
+alias(
+    name = "buffa-descriptor",
+    actual = "//private/3rdparty/crates:buffa-descriptor",
+)
+
+alias(
+    name = "buffa-types",
+    actual = "//private/3rdparty/crates:buffa-types",
+)
+
+alias(
+    name = "chrono",
+    actual = "//private/3rdparty/crates:chrono",
+)
+
+alias(
+    name = "connectrpc",
+    actual = "//private/3rdparty/crates:connectrpc",
+)
+
+alias(
+    name = "jiff",
+    actual = "//private/3rdparty/crates:jiff",
+)
+
+alias(
+    name = "serde",
+    actual = "//private/3rdparty/crates:serde",
 )
 
 bzl_library(

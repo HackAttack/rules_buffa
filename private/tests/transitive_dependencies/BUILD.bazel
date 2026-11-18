@@ -32,7 +32,7 @@ rust_test(
         ":a_rs_proto",
         # Add b_proto as a dependency directly to ensure compatibility with `a.proto`'s imports.
         "//private/tests/transitive_dependencies/b:b_rs_proto",
-        "//private/3rdparty/crates:buffa-types",
+        "//:buffa-types",
     ],
 )
 
@@ -60,13 +60,13 @@ toolchain(
 
 rust_buffa_toolchain(
     name = "buffa_toolchain_transitive_includes_enabled_impl",
-    codegen = "//private:codegen",
+    codegen = "//:codegen",
     # This is the important delta from the default toolchain.
     include_transitive_deps = True,
     runtime = [
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:buffa-descriptor",
-        "//private/3rdparty/crates:buffa-types",
-        "//private/3rdparty/crates:serde",
+        "//:buffa",
+        "//:buffa-descriptor",
+        "//:buffa-types",
+        "//:serde",
     ],
 )

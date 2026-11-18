@@ -39,6 +39,6 @@ rust_test(
         ":a_rs_proto",
         # Add b_proto as a dependency directly to ensure compatibility with `a.proto`'s imports.
         "//private/tests/transform/b:b_rs_proto",
-        "//private/3rdparty/crates:buffa-types",
+        "//:buffa-types",
     ],
 )

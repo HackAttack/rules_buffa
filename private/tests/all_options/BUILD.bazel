@@ -41,11 +41,11 @@ rust_test(
     edition = "2021",
     deps = [
         ":all_options_rs_buffa",
-        "//private/3rdparty/crates:arbitrary",
-        "//private/3rdparty/crates:buffa",
-        "//private/3rdparty/crates:buffa-descriptor",
-        "//private/3rdparty/crates:buffa-types",
-        "//private/3rdparty/crates:chrono",
-        "//private/3rdparty/crates:jiff",
+        "//:arbitrary",
+        "//:buffa",
+        "//:buffa-descriptor",
+        "//:buffa-types",
+        "//:chrono",
+        "//:jiff",
     ],
 )
