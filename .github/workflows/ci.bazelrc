@@ -1,0 +1,6 @@
+# Bazel settings applied only on CI, through --bazelrc in ci.yaml.
+
+# Show where options came from.
+common --announce_rc
+# Show failing tests' logs in the job output.
+test --test_output=errors

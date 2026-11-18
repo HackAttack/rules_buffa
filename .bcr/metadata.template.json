@@ -1,0 +1,13 @@
+{
+  "homepage": "https://github.com/HackAttack/rules_buffa",
+  "maintainers": [
+    {
+      "name": "Michael Hackner",
+      "github": "HackAttack",
+      "github_user_id": 1222646
+    }
+  ],
+  "repository": ["github:HackAttack/rules_buffa"],
+  "versions": [],
+  "yanked_versions": {}
+}
