@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tests.other;
+
+import "b.proto";
+
+message Wrapper {
+    tests.shared.Outer outer = 1;
+}

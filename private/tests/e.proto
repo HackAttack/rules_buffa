@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tests.transformed.user;
+
+import "d.proto";
+
+message Holder {
+    tests.transformed.Tagged tagged = 1;
+}

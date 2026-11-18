@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tests.prefixed;
+
+message Thing {
+    string name = 1;
+
+    message Part {
+        int32 n = 1;
+    }
+
+    Part part = 2;
+}

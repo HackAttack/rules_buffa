@@ -1,0 +1,54 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_rust//rust:defs.bzl", "rust_test")
+load("//:defs.bzl", "rust_buffa_library", "rust_buffa_transform")
+
+package(default_visibility = ["//private/tests:__subpackages__"])
+
+rust_buffa_transform(
+    name = "transform_1",
+    opts = [
+        "type_attribute=.=#[derive(Hash)]",
+    ],
+)
+
+# `Eq` cannot be derived while the generated struct carries
+# `__buffa_unknown_fields` (buffa's `UnknownFields` is `PartialEq`/`Hash` but
+# not `Eq`, since unknown fields can hold f64 wire values). Prost preserves
+# no unknown fields, so disabling them keeps the message equivalent.
+rust_buffa_transform(
+    name = "transform_2",
+    opts = [
+        "type_attribute=.=#[derive(Eq)]",
+        "unknown_fields=false",
+    ],
+)
+
+proto_library(
+    name = "c_proto",
+    srcs = [
+        "c.proto",
+    ],
+    data = [
+        ":transform_1",
+        ":transform_2",
+    ],
+    strip_import_prefix = "/private/tests/transform",
+    deps = [
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:duration_proto",
+    ],
+)
+
+rust_buffa_library(
+    name = "c_rs_proto",
+    proto = ":c_proto",
+)
+
+rust_test(
+    name = "c_test",
+    srcs = ["c_test.rs"],
+    edition = "2021",
+    deps = [
+        ":c_rs_proto",
+    ],
+)

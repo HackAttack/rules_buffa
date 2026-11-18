@@ -1,0 +1,14 @@
+load("@rules_rust//rust:defs.bzl", "rust_test")
+
+package(default_visibility = ["//private/tests:__subpackages__"])
+
+rust_test(
+    name = "same_proto_name_test",
+    srcs = ["same_proto_name_test.rs"],
+    edition = "2021",
+    deps = [
+        "//private/tests/same_proto_name/package1:models_rs_proto",
+        "//private/tests/same_proto_name/package2:models_rs_proto",
+        "//private/tests/same_proto_name/package3:models_rs_proto",
+    ],
+)

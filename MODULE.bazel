@@ -1,0 +1,33 @@
+"""bazelbuild/rules_rust/extensions/buffa"""
+
+module(
+    name = "rules_rust_buffa",
+    version = "0.75.0",
+)
+
+bazel_dep(name = "rules_rust", version = "0.75.0")
+bazel_dep(name = "platforms", version = "1.1.0")
+bazel_dep(name = "bazel_skylib", version = "1.8.2")
+bazel_dep(name = "rules_cc", version = "0.2.9")
+bazel_dep(name = "rules_proto", version = "7.1.0")
+bazel_dep(name = "protobuf", version = "28.3", repo_name = "com_google_protobuf")
+
+bazel_dep(name = "googleapis", version = "0.0.0-20241220-5e258e33.bcr.1", dev_dependency = True, repo_name = "com_google_googleapis")
+
+rust_ext = use_extension("//:extensions.bzl", "rust_ext")
+use_repo(
+    rust_ext,
+    "rrbd",
+    "rrbd__buffa-0.9.2",
+    "rrbd__buffa-codegen-0.9.2",
+    "rrbd__buffa-descriptor-0.9.2",
+    "rrbd__buffa-types-0.9.2",
+    "rrbd__connectrpc-0.9.1",
+    "rrbd__connectrpc-codegen-0.9.0",
+    "rrbd__futures-0.3.34",
+    "rrbd__serde-1.0.229",
+)
+
+register_toolchains(
+    "//:default_buffa_toolchain",
+)

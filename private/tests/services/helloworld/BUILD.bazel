@@ -1,0 +1,43 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_rust//rust:defs.bzl", "rust_library_group", "rust_test")
+load("//:defs.bzl", "rust_buffa_library")
+load("//private/tests:transition.bzl", "extra_toolchain_wrapper")
+
+package(default_visibility = ["//private/tests:__subpackages__"])
+
+proto_library(
+    name = "helloworld_proto",
+    srcs = ["helloworld.proto"],
+)
+
+rust_buffa_library(
+    name = "helloworld_rs_buffa",
+    proto = ":helloworld_proto",
+)
+
+# The connect toolchain must be injected through the transition so the
+# generated crate gets service stubs, and the test's deps must all come
+# through it so the vendored runtime crates are built in the same
+# configuration (like `toolchain_opts_test`).
+rust_library_group(
+    name = "helloworld_rs_buffa_deps",
+    deps = [
+        ":helloworld_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:connectrpc",
+        "//private/3rdparty/crates:futures",
+    ],
+)
+
+extra_toolchain_wrapper(
+    name = "helloworld_rs_buffa_connect",
+    dep = ":helloworld_rs_buffa_deps",
+    toolchain = "//:connect_buffa_toolchain",
+)
+
+rust_test(
+    name = "helloworld_test",
+    srcs = ["helloworld_test.rs"],
+    edition = "2024",
+    deps = [":helloworld_rs_buffa_connect"],
+)

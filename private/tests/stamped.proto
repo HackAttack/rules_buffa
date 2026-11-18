@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tests.stamped;
+
+import "stamp.proto";
+
+message Event {
+    tests.stamp.Stamp at = 1;
+}

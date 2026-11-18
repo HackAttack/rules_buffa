@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package tests.pool.two;
+
+message Two {
+    int32 v = 1;
+}

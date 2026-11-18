@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tests.shared;
+
+import "a.proto";
+import "google/protobuf/timestamp.proto";
+
+message Outer {
+    Inner inner = 1;
+    Inner.Nested nested = 2;
+    Kind kind = 3;
+    google.protobuf.Timestamp created = 4;
+}

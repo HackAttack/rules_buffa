@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package tests.prefix_user;
+
+import "prefixed.proto";
+
+message Holder {
+    tests.prefixed.Thing thing = 1;
+    tests.prefixed.Thing.Part part = 2;
+}

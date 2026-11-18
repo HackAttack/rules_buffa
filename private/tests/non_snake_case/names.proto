@@ -1,0 +1,6 @@
+syntax = "proto3";
+package lint.names;
+
+message Pose {
+    int32 pos_vcf_odom__odom = 1;
+}

@@ -1,0 +1,10 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+package(default_visibility = ["//private/tests:__subpackages__"])
+
+proto_library(
+    name = "same_proto",
+    srcs = [
+        "a.proto",
+    ],
+)

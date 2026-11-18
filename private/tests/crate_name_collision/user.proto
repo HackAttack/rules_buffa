@@ -1,0 +1,10 @@
+syntax = "proto3";
+package collision.user;
+
+import "private/tests/crate_name_collision/a/a.proto";
+import "private/tests/crate_name_collision/b/b.proto";
+
+message User {
+    collision.a.A a = 1;
+    collision.b.B b = 2;
+}

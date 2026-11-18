@@ -1,0 +1,27 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("//:defs.bzl", "rust_buffa_library")
+load(":collision_test.bzl", "collision_test")
+
+package(default_visibility = ["//private/tests:__subpackages__"])
+
+proto_library(
+    name = "user_proto",
+    srcs = [
+        "user.proto",
+    ],
+    deps = [
+        "//private/tests/crate_name_collision/a:same_proto",
+        "//private/tests/crate_name_collision/b:same_proto",
+    ],
+)
+
+rust_buffa_library(
+    name = "user_rs_buffa",
+    proto = ":user_proto",
+    tags = ["manual"],
+)
+
+collision_test(
+    name = "collision_test",
+    target_under_test = ":user_rs_buffa",
+)

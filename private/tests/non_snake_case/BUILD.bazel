@@ -1,0 +1,36 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_rust//rust:defs.bzl", "rust_test")
+load("//:defs.bzl", "rust_buffa_library")
+
+package(default_visibility = ["//private/tests:__subpackages__"])
+
+proto_library(
+    name = "Lint_Names_proto",
+    srcs = [
+        "names.proto",
+    ],
+)
+
+rust_buffa_library(
+    name = "lint_names_rs_buffa",
+    proto = ":Lint_Names_proto",
+)
+
+filegroup(
+    name = "lint_names_src",
+    srcs = [":lint_names_rs_buffa"],
+    output_group = "buffa_srcs",
+)
+
+rust_test(
+    name = "names_test",
+    srcs = ["names_test.rs"],
+    data = [":lint_names_src"],
+    edition = "2021",
+    env = {
+        "BUFFA_SRC": "$(rootpath :lint_names_src)",
+    },
+    deps = [
+        ":lint_names_rs_buffa",
+    ],
+)

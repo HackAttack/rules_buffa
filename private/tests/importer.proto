@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package tests.importer;
+
+import "reexport.proto";
+
+message Uses {
+    tests.shared.Inner inner = 1;
+}

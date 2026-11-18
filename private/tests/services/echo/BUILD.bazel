@@ -1,0 +1,42 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_rust//rust:defs.bzl", "rust_library_group", "rust_test")
+load("//:defs.bzl", "rust_buffa_library")
+load("//private/tests:transition.bzl", "extra_toolchain_wrapper")
+
+package(default_visibility = ["//private/tests:__subpackages__"])
+
+proto_library(
+    name = "echo_proto",
+    srcs = ["echo.proto"],
+)
+
+rust_buffa_library(
+    name = "echo_rs_buffa",
+    proto = ":echo_proto",
+)
+
+# Same shape as the helloworld test: the connect toolchain through the
+# transition, with the runtime crates bundled so they share the
+# configuration.
+rust_library_group(
+    name = "echo_rs_buffa_deps",
+    deps = [
+        ":echo_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:connectrpc",
+        "//private/3rdparty/crates:futures",
+    ],
+)
+
+extra_toolchain_wrapper(
+    name = "echo_rs_buffa_connect",
+    dep = ":echo_rs_buffa_deps",
+    toolchain = "//:connect_buffa_toolchain",
+)
+
+rust_test(
+    name = "echo_test",
+    srcs = ["echo_test.rs"],
+    edition = "2024",
+    deps = [":echo_rs_buffa_connect"],
+)

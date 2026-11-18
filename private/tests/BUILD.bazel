@@ -1,0 +1,322 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_rust//rust:defs.bzl", "rust_library_group", "rust_test")
+load(
+    "//:defs.bzl",
+    "rust_buffa_library",
+    "rust_buffa_toolchain",
+    "rust_buffa_transform",
+)
+load(":transition.bzl", "extra_toolchain_wrapper")
+
+proto_library(
+    name = "a_proto",
+    srcs = ["a.proto"],
+    strip_import_prefix = "/private/tests",
+)
+
+# `b.proto` shares `a.proto`'s package: the two `proto_library` targets produce
+# separate crates that must resolve each other's types.
+proto_library(
+    name = "b_proto",
+    srcs = ["b.proto"],
+    strip_import_prefix = "/private/tests",
+    deps = [
+        ":a_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+proto_library(
+    name = "all_proto",
+    deps = [":b_proto"],
+)
+
+proto_library(
+    name = "c_proto",
+    srcs = ["c.proto"],
+    strip_import_prefix = "/private/tests",
+    deps = [":all_proto"],
+)
+
+rust_buffa_library(
+    name = "a_rs_buffa",
+    proto = ":a_proto",
+)
+
+rust_buffa_library(
+    name = "b_rs_buffa",
+    proto = ":b_proto",
+)
+
+rust_buffa_library(
+    name = "c_rs_buffa",
+    proto = ":c_proto",
+)
+
+rust_test(
+    name = "buffa_test",
+    srcs = ["buffa_test.rs"],
+    edition = "2021",
+    deps = [
+        ":a_rs_buffa",
+        ":b_rs_buffa",
+        ":c_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:buffa-types",
+    ],
+)
+
+rust_buffa_toolchain(
+    name = "json_toolchain_impl",
+    codegen = "//private:codegen",
+    opts = ["json=true"],
+    runtime = [
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:buffa-descriptor",
+        "//private/3rdparty/crates:buffa-types",
+        "//private/3rdparty/crates:serde",
+    ],
+)
+
+toolchain(
+    name = "json_toolchain",
+    toolchain = ":json_toolchain_impl",
+    toolchain_type = "//:toolchain_type",
+)
+
+# `toolchain_opts_test`'s deps must all come through the transition so the
+# vendored `buffa` is built in the same configuration as the generated crate's
+# runtime; a second copy in the test's own config collides at link time.
+rust_library_group(
+    name = "a_rs_buffa_json_deps",
+    deps = [
+        ":a_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+    ],
+)
+
+extra_toolchain_wrapper(
+    name = "a_rs_buffa_json",
+    dep = ":a_rs_buffa_json_deps",
+    toolchain = ":json_toolchain",
+)
+
+rust_test(
+    name = "toolchain_opts_test",
+    srcs = ["toolchain_opts_test.rs"],
+    edition = "2021",
+    deps = [":a_rs_buffa_json"],
+)
+
+# `d_transform` renames the crate, gates JSON impls on the `json` crate
+# feature, adds the serde dependency the generated derives need, and appends
+# `d_extra.rs` to the crate root; `transform_test` fails to build if any
+# piece is ignored. `gate_impls` also gates the always-on views impls, so
+# `views` must be a crate feature too (`e_proto`'s views reference them).
+rust_buffa_transform(
+    name = "d_transform",
+    srcs = ["d_extra.rs"],
+    crate_features = [
+        "json",
+        "views",
+    ],
+    crate_name = "renamed_d",
+    opts = [
+        "gate_impls=true",
+        "json=true",
+    ],
+    deps = ["//private/3rdparty/crates:serde"],
+)
+
+proto_library(
+    name = "d_proto",
+    srcs = ["d.proto"],
+    data = [":d_transform"],
+    strip_import_prefix = "/private/tests",
+)
+
+proto_library(
+    name = "e_proto",
+    srcs = ["e.proto"],
+    strip_import_prefix = "/private/tests",
+    deps = [":d_proto"],
+)
+
+rust_buffa_library(
+    name = "d_rs_buffa",
+    proto = ":d_proto",
+)
+
+rust_buffa_library(
+    name = "e_rs_buffa",
+    proto = ":e_proto",
+)
+
+rust_test(
+    name = "transform_test",
+    srcs = ["transform_test.rs"],
+    edition = "2021",
+    deps = [
+        ":d_rs_buffa",
+        ":e_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+    ],
+)
+
+# The transform's `extern_path` remaps `.tests.stamp.Stamp` to the WKT
+# `Timestamp` even though `stamp_proto`'s manifest maps it to its own crate.
+rust_buffa_transform(
+    name = "stamped_transform",
+    opts = ["extern_path=.tests.stamp.Stamp=::buffa_types::google::protobuf::Timestamp"],
+)
+
+proto_library(
+    name = "stamp_proto",
+    srcs = ["stamp.proto"],
+    strip_import_prefix = "/private/tests",
+)
+
+proto_library(
+    name = "stamped_proto",
+    srcs = ["stamped.proto"],
+    data = [":stamped_transform"],
+    strip_import_prefix = "/private/tests",
+    deps = [":stamp_proto"],
+)
+
+rust_buffa_library(
+    name = "stamp_rs_buffa",
+    proto = ":stamp_proto",
+)
+
+rust_buffa_library(
+    name = "stamped_rs_buffa",
+    proto = ":stamped_proto",
+)
+
+rust_test(
+    name = "extern_path_test",
+    srcs = ["extern_path_test.rs"],
+    edition = "2021",
+    deps = [
+        ":stamped_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:buffa-types",
+    ],
+)
+
+# `reexport_proto` re-exports `a_proto` via `import public`; `importer_proto`
+# depends only on `reexport_proto` but uses `a_proto`'s types.
+proto_library(
+    name = "reexport_proto",
+    srcs = ["reexport.proto"],
+    strip_import_prefix = "/private/tests",
+    exports = [":a_proto"],
+    deps = [":a_proto"],
+)
+
+proto_library(
+    name = "importer_proto",
+    srcs = ["importer.proto"],
+    strip_import_prefix = "/private/tests",
+    deps = [":reexport_proto"],
+)
+
+rust_buffa_library(
+    name = "reexport_rs_buffa",
+    proto = ":reexport_proto",
+)
+
+rust_buffa_library(
+    name = "importer_rs_buffa",
+    proto = ":importer_proto",
+)
+
+rust_test(
+    name = "exports_test",
+    srcs = ["exports_test.rs"],
+    edition = "2021",
+    deps = [
+        ":a_rs_buffa",
+        ":importer_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+    ],
+)
+
+# Two packages in one proto_library share one descriptor pool when
+# `shared_descriptor_pool` is on.
+rust_buffa_transform(
+    name = "pool_transform",
+    opts = [
+        "reflection=true",
+        "shared_descriptor_pool=true",
+    ],
+)
+
+proto_library(
+    name = "pool_proto",
+    srcs = [
+        "pool_one.proto",
+        "pool_two.proto",
+    ],
+    data = [":pool_transform"],
+    strip_import_prefix = "/private/tests",
+)
+
+rust_buffa_library(
+    name = "pool_rs_buffa",
+    proto = ":pool_proto",
+)
+
+rust_test(
+    name = "shared_pool_test",
+    srcs = ["shared_pool_test.rs"],
+    edition = "2021",
+    deps = [
+        ":pool_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+    ],
+)
+
+# `prefixed_proto`'s transform prefixes its type names; `prefix_user_proto`
+# resolves them through `prefixed_proto`'s extern-path manifest with no
+# transform of its own.
+rust_buffa_transform(
+    name = "prefixed_transform",
+    opts = ["type_name_prefix=Rpc"],
+)
+
+proto_library(
+    name = "prefixed_proto",
+    srcs = ["prefixed.proto"],
+    data = [":prefixed_transform"],
+    strip_import_prefix = "/private/tests",
+)
+
+proto_library(
+    name = "prefix_user_proto",
+    srcs = ["prefix_user.proto"],
+    strip_import_prefix = "/private/tests",
+    deps = [":prefixed_proto"],
+)
+
+rust_buffa_library(
+    name = "prefixed_rs_buffa",
+    proto = ":prefixed_proto",
+)
+
+rust_buffa_library(
+    name = "prefix_user_rs_buffa",
+    proto = ":prefix_user_proto",
+)
+
+rust_test(
+    name = "type_name_prefix_test",
+    srcs = ["type_name_prefix_test.rs"],
+    edition = "2021",
+    deps = [
+        ":prefix_user_rs_buffa",
+        ":prefixed_rs_buffa",
+        "//private/3rdparty/crates:buffa",
+    ],
+)

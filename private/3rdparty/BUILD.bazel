@@ -1,0 +1,60 @@
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@rules_rust//crate_universe:defs.bzl", "crate", "crates_vendor")
+
+crates_vendor(
+    name = "crates_vendor",
+    cargo_lockfile = "Cargo.Bazel.lock",
+    mode = "remote",
+    # Default features, plus what the module's toolchains and tests use: JSON
+    # for the connect toolchain, descriptor views for default codegen, and
+    # reflection for the shared pool test.
+    packages = {
+        "buffa": crate.spec(
+            features = ["json"],
+            version = "=0.9.2",
+        ),
+        "buffa-codegen": crate.spec(
+            version = "=0.9.2",
+        ),
+        "buffa-descriptor": crate.spec(
+            features = [
+                "json",
+                "reflect",
+                "views",
+            ],
+            version = "=0.9.2",
+        ),
+        "buffa-types": crate.spec(
+            features = ["json"],
+            version = "=0.9.2",
+        ),
+        "connectrpc": crate.spec(
+            default_features = False,
+            features = ["json"],
+            version = "=0.9.1",
+        ),
+        "connectrpc-codegen": crate.spec(
+            version = "=0.9.0",
+        ),
+        "futures": crate.spec(
+            features = ["executor"],
+            version = "0.3",
+        ),
+        "serde": crate.spec(
+            version = "1",
+        ),
+    },
+    # Shorten the repository name to avoid MAX_PATH issues on Windows
+    # `rules_rust_buffa_deps` == `rrbd`
+    repository_name = "rrbd",
+    tags = ["manual"],
+)
+
+bzl_library(
+    name = "bzl_lib",
+    srcs = [
+        "//private/3rdparty/crates:crates.bzl",
+        "//private/3rdparty/crates:defs.bzl",
+    ],
+    visibility = ["//private:__pkg__"],
+)

@@ -1,0 +1,6 @@
+syntax = "proto3";
+package collision.a;
+
+message A {
+    string name = 1;
+}
