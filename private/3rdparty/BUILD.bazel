@@ -5,12 +5,20 @@ crates_vendor(
     name = "crates_vendor",
     cargo_lockfile = "Cargo.Bazel.lock",
     mode = "remote",
-    # Default features, plus what the module's toolchains and tests use: JSON
-    # for the connect toolchain, descriptor views for default codegen, and
-    # reflection for the shared pool test.
+    # Every feature of the runtime crates, so every codegen option and
+    # runtime API works with the default toolchain. Generated code names
+    # `arbitrary` and `serde`, and the `buffa-types` conversions name `chrono`
+    # and `jiff`, so those are vendored directly to give them labels.
     packages = {
+        "arbitrary": crate.spec(
+            version = "1",
+        ),
         "buffa": crate.spec(
-            features = ["json"],
+            features = [
+                "arbitrary",
+                "json",
+                "text",
+            ],
             version = "=0.9.2",
         ),
         "buffa-codegen": crate.spec(
@@ -18,15 +26,26 @@ crates_vendor(
         ),
         "buffa-descriptor": crate.spec(
             features = [
+                "arbitrary",
                 "json",
                 "reflect",
+                "text",
                 "views",
             ],
             version = "=0.9.2",
         ),
         "buffa-types": crate.spec(
-            features = ["json"],
+            features = [
+                "arbitrary",
+                "chrono",
+                "jiff",
+                "json",
+                "reflect",
+            ],
             version = "=0.9.2",
+        ),
+        "chrono": crate.spec(
+            version = "0.4.34",
         ),
         "connectrpc": crate.spec(
             default_features = False,
@@ -39,6 +58,9 @@ crates_vendor(
         "futures": crate.spec(
             features = ["executor"],
             version = "0.3",
+        ),
+        "jiff": crate.spec(
+            version = "0.2",
         ),
         "serde": crate.spec(
             version = "1",

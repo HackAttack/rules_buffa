@@ -32,6 +32,18 @@ filegroup(
 
 # Workspace Member Dependencies
 alias(
+    name = "arbitrary-1.5.0",
+    actual = "@rbd__arbitrary-1.5.0//:arbitrary",
+    tags = ["manual"],
+)
+
+alias(
+    name = "arbitrary",
+    actual = "@rbd__arbitrary-1.5.0//:arbitrary",
+    tags = ["manual"],
+)
+
+alias(
     name = "buffa-0.9.2",
     actual = "@rbd__buffa-0.9.2//:buffa",
     tags = ["manual"],
@@ -80,6 +92,18 @@ alias(
 )
 
 alias(
+    name = "chrono-0.4.45",
+    actual = "@rbd__chrono-0.4.45//:chrono",
+    tags = ["manual"],
+)
+
+alias(
+    name = "chrono",
+    actual = "@rbd__chrono-0.4.45//:chrono",
+    tags = ["manual"],
+)
+
+alias(
     name = "connectrpc-0.9.1",
     actual = "@rbd__connectrpc-0.9.1//:connectrpc",
     tags = ["manual"],
@@ -112,6 +136,18 @@ alias(
 alias(
     name = "futures",
     actual = "@rbd__futures-0.3.34//:futures",
+    tags = ["manual"],
+)
+
+alias(
+    name = "jiff-0.2.46",
+    actual = "@rbd__jiff-0.2.46//:jiff",
+    tags = ["manual"],
+)
+
+alias(
+    name = "jiff",
+    actual = "@rbd__jiff-0.2.46//:jiff",
     tags = ["manual"],
 )
 

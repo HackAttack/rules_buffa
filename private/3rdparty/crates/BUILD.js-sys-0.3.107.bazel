@@ -36,7 +36,13 @@ rust_library(
     ),
     crate_features = [
         "std",
-    ],
+    ] + select({
+        "@rules_rust//rust/platform:wasm32-unknown-unknown": [
+            "default",  # wasm32-unknown-unknown
+            "unsafe-eval",  # wasm32-unknown-unknown
+        ],
+        "//conditions:default": [],
+    }),
     crate_root = "src/lib.rs",
     edition = "2021",
     rustc_env_files = [

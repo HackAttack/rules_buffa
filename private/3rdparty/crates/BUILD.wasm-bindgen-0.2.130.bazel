@@ -40,7 +40,12 @@ rust_library(
     ),
     crate_features = [
         "std",
-    ],
+    ] + select({
+        "@rules_rust//rust/platform:wasm32-unknown-unknown": [
+            "default",  # wasm32-unknown-unknown
+        ],
+        "//conditions:default": [],
+    }),
     crate_root = "src/lib.rs",
     edition = "2021",
     proc_macro_deps = [
@@ -152,7 +157,12 @@ cargo_build_script(
     ),
     crate_features = [
         "std",
-    ],
+    ] + select({
+        "@rules_rust//rust/platform:wasm32-unknown-unknown": [
+            "default",  # wasm32-unknown-unknown
+        ],
+        "//conditions:default": [],
+    }),
     crate_name = "build_script_build",
     crate_root = "build.rs",
     data = glob(

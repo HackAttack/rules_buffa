@@ -133,8 +133,11 @@ generated code on crate features: `arbitrary=true` is always gated, and
 `exclude_package` and `file_per_package` do not apply: each `proto_library`
 generates only its own files, into one crate root.
 
-Options that need runtime support require matching features on the `runtime`
-crates:
+The default toolchain supports every option: its vendored `buffa`,
+`buffa-types`, and `buffa-descriptor` enable every feature, including the
+`jiff` and `chrono` conversions in `buffa-types`, and its `runtime` includes
+`serde` and `arbitrary`. A custom toolchain needs matching features on its own
+`runtime` crates:
 
 - `json`: `json` on `buffa`, `buffa-types`, and `buffa-descriptor`, plus
   `serde` in `runtime`.
@@ -145,14 +148,11 @@ crates:
 - Views (on by default): `views` on `buffa-descriptor`.
 
 The `buffa-descriptor` features matter only when protos use
-`descriptor.proto` message types as fields. The module's vendored crates
-enable only what its own toolchains use (JSON, descriptor views, and
-reflection), so other options, and extras such as the `jiff`/`chrono`
-conversions in `buffa-types`, need your own crates in a custom toolchain.
-Two limits come from buffa itself: `Api`/`Method`/`Mixin`/`Type`/
-`SourceContext` have no serde impls, so `json=true` cannot compile a message
-embedding them, and `descriptor.proto`/`plugin.proto` types have no reflect
-impls, so `reflection=true` cannot either.
+`descriptor.proto` message types as fields. Two limits come from buffa
+itself: `Api`/`Method`/`Mixin`/`Type`/`SourceContext` have no serde impls,
+so `json=true` cannot compile a message embedding them, and
+`descriptor.proto`/`plugin.proto` types have no reflect impls, so
+`reflection=true` cannot either.
 
 Lastly, you must register the toolchain in your `MODULE.bazel` file. For example:
 

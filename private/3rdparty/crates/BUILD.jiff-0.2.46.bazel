@@ -37,6 +37,17 @@ rust_library(
             "WORKSPACE.bazel",
         ],
     ),
+    crate_features = [
+        "alloc",
+        "default",
+        "perf-inline",
+        "std",
+        "tz-fat",
+        "tz-system",
+        "tzdb-bundle-platform",
+        "tzdb-concatenated",
+        "tzdb-zoneinfo",
+    ],
     crate_root = "src/lib.rs",
     edition = "2021",
     rustc_env_files = [
@@ -114,6 +125,14 @@ rust_library(
     deps = [
         "@rbd__jiff-core-0.1.8//:jiff_core",
     ] + select({
+        "@rules_rust//rust/platform:aarch64-pc-windows-msvc": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # aarch64-pc-windows-msvc
+            "@rbd__windows-link-0.2.1//:windows_link",  # aarch64-pc-windows-msvc
+        ],
+        "@rules_rust//rust/platform:i686-pc-windows-msvc": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # i686-pc-windows-msvc
+            "@rbd__windows-link-0.2.1//:windows_link",  # i686-pc-windows-msvc
+        ],
         "@rules_rust//rust/platform:riscv32imc-unknown-none-elf": [
             "@rbd__portable-atomic-1.15.0//:portable_atomic",  # cfg(not(target_has_atomic = "ptr"))
             "@rbd__portable-atomic-util-0.2.8//:portable_atomic_util",  # cfg(not(target_has_atomic = "ptr"))
@@ -121,6 +140,25 @@ rust_library(
         "@rules_rust//rust/platform:thumbv6m-none-eabi": [
             "@rbd__portable-atomic-1.15.0//:portable_atomic",  # cfg(not(target_has_atomic = "ptr"))
             "@rbd__portable-atomic-util-0.2.8//:portable_atomic_util",  # cfg(not(target_has_atomic = "ptr"))
+        ],
+        "@rules_rust//rust/platform:wasm32-unknown-emscripten": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # wasm32-unknown-emscripten
+        ],
+        "@rules_rust//rust/platform:wasm32-unknown-unknown": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # wasm32-unknown-unknown
+        ],
+        "@rules_rust//rust/platform:wasm32-wasip1": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # wasm32-wasip1
+        ],
+        "@rules_rust//rust/platform:wasm32-wasip1-threads": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # wasm32-wasip1-threads
+        ],
+        "@rules_rust//rust/platform:wasm32-wasip2": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # wasm32-wasip2
+        ],
+        "@rules_rust//rust/platform:x86_64-pc-windows-msvc": [
+            "@rbd__jiff-tzdb-platform-0.1.3//:jiff_tzdb_platform",  # x86_64-pc-windows-msvc
+            "@rbd__windows-link-0.2.1//:windows_link",  # x86_64-pc-windows-msvc
         ],
         "//conditions:default": [],
     }),

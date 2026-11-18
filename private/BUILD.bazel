@@ -21,13 +21,17 @@ rust_test(
     edition = "2021",
 )
 
+# `arbitrary` and `serde` are named by the code `arbitrary=true` and
+# `json=true` generate.
 rust_buffa_toolchain(
     name = "default_buffa_toolchain_impl",
     codegen = ":codegen",
     runtime = [
+        "//private/3rdparty/crates:arbitrary",
         "//private/3rdparty/crates:buffa",
         "//private/3rdparty/crates:buffa-descriptor",
         "//private/3rdparty/crates:buffa-types",
+        "//private/3rdparty/crates:serde",
     ],
 )
 
@@ -54,6 +58,7 @@ rust_buffa_toolchain(
     name = "connect_buffa_toolchain_impl",
     codegen = ":connect_codegen",
     runtime = [
+        "//private/3rdparty/crates:arbitrary",
         "//private/3rdparty/crates:buffa",
         "//private/3rdparty/crates:buffa-descriptor",
         "//private/3rdparty/crates:buffa-types",

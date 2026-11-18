@@ -1,0 +1,51 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_rust//rust:defs.bzl", "rust_test")
+load("//:defs.bzl", "rust_buffa_library", "rust_buffa_transform")
+
+# Every codegen option that needs a runtime crate feature, under the default
+# toolchain: `all_options_test` fails to build if the module's vendored
+# runtime lacks any of them.
+rust_buffa_transform(
+    name = "all_options_transform",
+    crate_features = ["arbitrary"],
+    opts = [
+        "arbitrary=true",
+        "json=true",
+        "reflection=true",
+        "text=true",
+    ],
+)
+
+proto_library(
+    name = "all_options_proto",
+    srcs = ["all_options.proto"],
+    data = [":all_options_transform"],
+    strip_import_prefix = "/private/tests",
+    deps = [
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:struct_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:wrappers_proto",
+    ],
+)
+
+rust_buffa_library(
+    name = "all_options_rs_buffa",
+    proto = ":all_options_proto",
+)
+
+rust_test(
+    name = "all_options_test",
+    srcs = ["all_options_test.rs"],
+    edition = "2021",
+    deps = [
+        ":all_options_rs_buffa",
+        "//private/3rdparty/crates:arbitrary",
+        "//private/3rdparty/crates:buffa",
+        "//private/3rdparty/crates:buffa-descriptor",
+        "//private/3rdparty/crates:buffa-types",
+        "//private/3rdparty/crates:chrono",
+        "//private/3rdparty/crates:jiff",
+    ],
+)
