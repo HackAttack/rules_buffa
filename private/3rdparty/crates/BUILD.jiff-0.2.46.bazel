@@ -23,7 +23,7 @@ rust_library(
         allow_empty = True,
     ),
     aliases = {
-        "@rrbd__jiff-core-0.1.8//:jiff_core": "jcore",
+        "@rbd__jiff-core-0.1.8//:jiff_core": "jcore",
     },
     compile_data = glob(
         include = ["**"],
@@ -112,15 +112,15 @@ rust_library(
     }),
     version = "0.2.46",
     deps = [
-        "@rrbd__jiff-core-0.1.8//:jiff_core",
+        "@rbd__jiff-core-0.1.8//:jiff_core",
     ] + select({
         "@rules_rust//rust/platform:riscv32imc-unknown-none-elf": [
-            "@rrbd__portable-atomic-1.15.0//:portable_atomic",  # cfg(not(target_has_atomic = "ptr"))
-            "@rrbd__portable-atomic-util-0.2.8//:portable_atomic_util",  # cfg(not(target_has_atomic = "ptr"))
+            "@rbd__portable-atomic-1.15.0//:portable_atomic",  # cfg(not(target_has_atomic = "ptr"))
+            "@rbd__portable-atomic-util-0.2.8//:portable_atomic_util",  # cfg(not(target_has_atomic = "ptr"))
         ],
         "@rules_rust//rust/platform:thumbv6m-none-eabi": [
-            "@rrbd__portable-atomic-1.15.0//:portable_atomic",  # cfg(not(target_has_atomic = "ptr"))
-            "@rrbd__portable-atomic-util-0.2.8//:portable_atomic_util",  # cfg(not(target_has_atomic = "ptr"))
+            "@rbd__portable-atomic-1.15.0//:portable_atomic",  # cfg(not(target_has_atomic = "ptr"))
+            "@rbd__portable-atomic-util-0.2.8//:portable_atomic_util",  # cfg(not(target_has_atomic = "ptr"))
         ],
         "//conditions:default": [],
     }),

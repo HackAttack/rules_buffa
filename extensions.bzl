@@ -16,6 +16,6 @@ def _rust_ext_impl(module_ctx):
     )
 
 rust_ext = module_extension(
-    doc = "Dependencies for the rules_rust buffa extension.",
+    doc = "Dependencies for rules_buffa.",
     implementation = _rust_ext_impl,
 )

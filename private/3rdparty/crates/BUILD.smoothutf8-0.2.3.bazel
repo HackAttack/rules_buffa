@@ -112,6 +112,6 @@ rust_library(
     }),
     version = "0.2.3",
     deps = [
-        "@rrbd__simdutf8-0.1.5//:simdutf8",
+        "@rbd__simdutf8-0.1.5//:simdutf8",
     ],
 )

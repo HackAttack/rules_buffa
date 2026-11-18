@@ -319,14 +319,14 @@ _CRATE_EDITIONS = {
 _NORMAL_DEPENDENCIES = {
     "": {
         _COMMON_CONDITION: {
-            "buffa": Label("@rrbd//buffa-0.9.2"),
-            "buffa-codegen": Label("@rrbd//buffa-codegen-0.9.2"),
-            "buffa-descriptor": Label("@rrbd//buffa-descriptor-0.9.2"),
-            "buffa-types": Label("@rrbd//buffa-types-0.9.2"),
-            "connectrpc": Label("@rrbd//connectrpc-0.9.1"),
-            "connectrpc-codegen": Label("@rrbd//connectrpc-codegen-0.9.0"),
-            "futures": Label("@rrbd//futures-0.3.34"),
-            "serde": Label("@rrbd//serde-1.0.229"),
+            "buffa": Label("@rbd//buffa-0.9.2"),
+            "buffa-codegen": Label("@rbd//buffa-codegen-0.9.2"),
+            "buffa-descriptor": Label("@rbd//buffa-descriptor-0.9.2"),
+            "buffa-types": Label("@rbd//buffa-types-0.9.2"),
+            "connectrpc": Label("@rbd//connectrpc-0.9.1"),
+            "connectrpc-codegen": Label("@rbd//connectrpc-codegen-0.9.0"),
+            "futures": Label("@rbd//futures-0.3.34"),
+            "serde": Label("@rbd//serde-1.0.229"),
         },
     },
 }
@@ -460,14 +460,14 @@ def crate_repositories():
     """
     maybe(
         crates_vendor_remote_repository,
-        name = "rrbd",
+        name = "rbd",
         # Lean interface: just point at `crates.bzl`; the repo rule
         # derives the sibling `BUILD.bazel` and `defs.bzl`.
         crates_module = Label("//private/3rdparty/crates:crates.bzl"),
     )
     maybe(
         http_archive,
-        name = "rrbd__anyhow-1.0.104",
+        name = "rbd__anyhow-1.0.104",
         sha256 = "330a5ed07fa54e4702c9d6c4174f74427fc0ef6e214bbd677ae50a5099946470",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/anyhow/1.0.104/download"],
@@ -477,7 +477,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__async-trait-0.1.92",
+        name = "rbd__async-trait-0.1.92",
         sha256 = "82f6aeea286b8eb4dd3431a1be1b59d290ace00f5bfd8e2a159bc2a05e2c1667",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/async-trait/0.1.92/download"],
@@ -487,7 +487,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__base64-0.22.1",
+        name = "rbd__base64-0.22.1",
         sha256 = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/base64/0.22.1/download"],
@@ -497,7 +497,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__buffa-0.9.2",
+        name = "rbd__buffa-0.9.2",
         sha256 = "a92f2f5df67a9d5ccfc65237bfc954c56328aee40a04a9b92381ecba370be246",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/buffa/0.9.2/download"],
@@ -507,7 +507,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__buffa-codegen-0.9.2",
+        name = "rbd__buffa-codegen-0.9.2",
         sha256 = "bb4bea10ef85ea3d06a20412c67cb612527feb25f33367eab850139441fb5dd9",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/buffa-codegen/0.9.2/download"],
@@ -517,7 +517,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__buffa-descriptor-0.9.2",
+        name = "rbd__buffa-descriptor-0.9.2",
         sha256 = "2b7dd79a6898e70dac8adae959c8ad2cae51ed96397935c91c996280cedcb55e",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/buffa-descriptor/0.9.2/download"],
@@ -527,7 +527,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__buffa-types-0.9.2",
+        name = "rbd__buffa-types-0.9.2",
         sha256 = "b15b05c8418f1e200e406e5b19df97400dffa833e2450e4392c506896cbc97ac",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/buffa-types/0.9.2/download"],
@@ -537,7 +537,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__bumpalo-3.20.4",
+        name = "rbd__bumpalo-3.20.4",
         sha256 = "87a0cf66fd1eb2fb7b822cb78370d82303750809bc6ba855f3f58e517d3238db",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/bumpalo/3.20.4/download"],
@@ -547,7 +547,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__bytes-1.12.1",
+        name = "rbd__bytes-1.12.1",
         sha256 = "fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/bytes/1.12.1/download"],
@@ -557,7 +557,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__cfg-if-1.0.5",
+        name = "rbd__cfg-if-1.0.5",
         sha256 = "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/cfg-if/1.0.5/download"],
@@ -567,7 +567,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__connectrpc-0.9.1",
+        name = "rbd__connectrpc-0.9.1",
         sha256 = "457cfa540c62e1b0b05db676cc9a9129162ad94d3a3eec6f2d19706c53acae7d",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/connectrpc/0.9.1/download"],
@@ -577,7 +577,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__connectrpc-codegen-0.9.0",
+        name = "rbd__connectrpc-codegen-0.9.0",
         sha256 = "514a7a6fbe705d532ddf490c221db7bd52c5b94fd691cb257a7c18e5646355bb",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/connectrpc-codegen/0.9.0/download"],
@@ -587,7 +587,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__foldhash-0.1.5",
+        name = "rbd__foldhash-0.1.5",
         sha256 = "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/foldhash/0.1.5/download"],
@@ -597,7 +597,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-0.3.34",
+        name = "rbd__futures-0.3.34",
         sha256 = "9a31d2a3fbaaeb2af2368bbdd904aa8e812d3c04a1ee10d3171f52d556e5d0a3",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures/0.3.34/download"],
@@ -607,7 +607,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-channel-0.3.34",
+        name = "rbd__futures-channel-0.3.34",
         sha256 = "b1f9e3d69d39e4862ffed03ed071a76f9a13ba1d9109d355b0f0aa6b15e393c4",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-channel/0.3.34/download"],
@@ -617,7 +617,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-core-0.3.34",
+        name = "rbd__futures-core-0.3.34",
         sha256 = "92d699e522242e69e3003b94ecc1f960f3a5e015aa7c5d7486e65ad01dd94f5e",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-core/0.3.34/download"],
@@ -627,7 +627,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-executor-0.3.34",
+        name = "rbd__futures-executor-0.3.34",
         sha256 = "031b47cf1a3c6cc8bc2fc76cd437f521619387907d469316e7c0bc278f1f5432",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-executor/0.3.34/download"],
@@ -637,7 +637,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-io-0.3.34",
+        name = "rbd__futures-io-0.3.34",
         sha256 = "53c0fa8157de1303bfffdaa1cc2a673bfffb60102f76b0ef4441659124373fed",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-io/0.3.34/download"],
@@ -647,7 +647,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-macro-0.3.34",
+        name = "rbd__futures-macro-0.3.34",
         sha256 = "9fb9654ba8355388abeb8dcb4fc62f511300867002afc858860463bdd9fe0c44",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-macro/0.3.34/download"],
@@ -657,7 +657,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-sink-0.3.34",
+        name = "rbd__futures-sink-0.3.34",
         sha256 = "1944426bf7d03f1d14f708785e4b33efd750b36d48a157b836b3efc15ede8e1d",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-sink/0.3.34/download"],
@@ -667,7 +667,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-task-0.3.34",
+        name = "rbd__futures-task-0.3.34",
         sha256 = "cd417de3d1d015fc3bfd2b1ea46dfc7bab72ef86f1cc7cc9c78e728b34a6d1fd",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-task/0.3.34/download"],
@@ -677,7 +677,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__futures-util-0.3.34",
+        name = "rbd__futures-util-0.3.34",
         sha256 = "0d50a92467f8ba5dd6e3ee5d4bd04d73ab2e4e1c44474a0674821dfce14b79bc",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/futures-util/0.3.34/download"],
@@ -687,7 +687,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__hashbrown-0.15.5",
+        name = "rbd__hashbrown-0.15.5",
         sha256 = "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/hashbrown/0.15.5/download"],
@@ -697,7 +697,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__heck-0.5.0",
+        name = "rbd__heck-0.5.0",
         sha256 = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/heck/0.5.0/download"],
@@ -707,7 +707,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__http-1.5.0",
+        name = "rbd__http-1.5.0",
         sha256 = "918d3568bebf352712bc2ef3d46a8bcf1a75b373be6539de198e9105cbbf9ce0",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/http/1.5.0/download"],
@@ -717,7 +717,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__http-body-1.1.0",
+        name = "rbd__http-body-1.1.0",
         sha256 = "ca2a8f2913ee65f60facd6a5905613afaa448497a0230cc41ce022d93290bc2c",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/http-body/1.1.0/download"],
@@ -727,7 +727,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__http-body-util-0.1.5",
+        name = "rbd__http-body-util-0.1.5",
         sha256 = "23169fe34a5fbcdd3f3862e78fb9b6fccd5f02a6dc6f732547005d45631ce71c",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/http-body-util/0.1.5/download"],
@@ -737,7 +737,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__itoa-1.0.19",
+        name = "rbd__itoa-1.0.19",
         sha256 = "3bd1574e617a9a6c1f8f8181bd7e841e1f20e4277607ef28945765188d6284d4",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/itoa/1.0.19/download"],
@@ -747,7 +747,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__jiff-0.2.46",
+        name = "rbd__jiff-0.2.46",
         sha256 = "175dc66334db3b9ab9985bf8b61cfed50dc16d20964bb47f9e479adcae984a7f",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/jiff/0.2.46/download"],
@@ -757,7 +757,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__jiff-core-0.1.8",
+        name = "rbd__jiff-core-0.1.8",
         sha256 = "e599b80292e597019b8b3e392de3f4bea2959ddfb8c7dff60e035e9e311a2c1b",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/jiff-core/0.1.8/download"],
@@ -767,7 +767,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__jiff-static-0.2.46",
+        name = "rbd__jiff-static-0.2.46",
         sha256 = "c7b1af7547d47354bc438d797e3854601bde8f8d185780c5ba4ab27afa54f1ba",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/jiff-static/0.2.46/download"],
@@ -777,7 +777,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__js-sys-0.3.107",
+        name = "rbd__js-sys-0.3.107",
         sha256 = "8dc09d2154098bbf4ef54eab6b117a3c24cbbffe94046b16ee6d6d4510584d3a",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/js-sys/0.3.107/download"],
@@ -787,7 +787,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__libc-0.2.191",
+        name = "rbd__libc-0.2.191",
         sha256 = "65cd87c9a6d60536580b316ad985726104730a5151c99845f2490428ef91240a",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/libc/0.2.191/download"],
@@ -797,7 +797,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__log-0.4.35",
+        name = "rbd__log-0.4.35",
         sha256 = "5d15f86d12da44cd8d4ec3c73984537eb7f4cadcb9776a575a0a8a05ca11005c",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/log/0.4.35/download"],
@@ -807,7 +807,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__memchr-2.8.3",
+        name = "rbd__memchr-2.8.3",
         sha256 = "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/memchr/2.8.3/download"],
@@ -817,7 +817,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__once_cell-1.21.4",
+        name = "rbd__once_cell-1.21.4",
         sha256 = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/once_cell/1.21.4/download"],
@@ -827,7 +827,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__percent-encoding-2.3.2",
+        name = "rbd__percent-encoding-2.3.2",
         sha256 = "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/percent-encoding/2.3.2/download"],
@@ -837,7 +837,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__pin-project-1.1.13",
+        name = "rbd__pin-project-1.1.13",
         sha256 = "2466b2336ed02bcdca6b294417127b90ec92038d1d5c4fbeac971a922e0e0924",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/pin-project/1.1.13/download"],
@@ -847,7 +847,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__pin-project-internal-1.1.13",
+        name = "rbd__pin-project-internal-1.1.13",
         sha256 = "c96395f0a926bc13b1c17622aaddda1ecb55d49c8f1bf9777e4d877800a43f8b",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/pin-project-internal/1.1.13/download"],
@@ -857,7 +857,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__pin-project-lite-0.2.17",
+        name = "rbd__pin-project-lite-0.2.17",
         sha256 = "a89322df9ebe1c1578d689c92318e070967d1042b512afbe49518723f4e6d5cd",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/pin-project-lite/0.2.17/download"],
@@ -867,7 +867,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__portable-atomic-1.15.0",
+        name = "rbd__portable-atomic-1.15.0",
         sha256 = "05c8b63e8d9609db387f0324918f81d68fe27748f084ef092fb35954d0539a85",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/portable-atomic/1.15.0/download"],
@@ -877,7 +877,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__portable-atomic-util-0.2.8",
+        name = "rbd__portable-atomic-util-0.2.8",
         sha256 = "10ab3eb7f3becc3a1cbc4f2c6f20267996cfc1a6467a873763411b136a122715",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/portable-atomic-util/0.2.8/download"],
@@ -887,7 +887,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__prettyplease-0.2.37",
+        name = "rbd__prettyplease-0.2.37",
         sha256 = "479ca8adacdd7ce8f1fb39ce9ecccbfe93a3f1344b3d0d97f20bc0196208f62b",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/prettyplease/0.2.37/download"],
@@ -897,7 +897,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__proc-macro2-1.0.107",
+        name = "rbd__proc-macro2-1.0.107",
         sha256 = "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/proc-macro2/1.0.107/download"],
@@ -907,7 +907,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__quote-1.0.47",
+        name = "rbd__quote-1.0.47",
         sha256 = "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/quote/1.0.47/download"],
@@ -917,7 +917,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__rustversion-1.0.23",
+        name = "rbd__rustversion-1.0.23",
         sha256 = "cf54715a573b99ac80df0bc206da022bcd442c974952c7b9720069370852e21f",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/rustversion/1.0.23/download"],
@@ -927,7 +927,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__serde-1.0.229",
+        name = "rbd__serde-1.0.229",
         sha256 = "4148590afebada386688f18773da617792bf2ef03ffc1e4cbd2b1d45b023e0ba",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/serde/1.0.229/download"],
@@ -937,7 +937,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__serde_core-1.0.229",
+        name = "rbd__serde_core-1.0.229",
         sha256 = "67dca2c9c51e58a4791a4b1ed58308b39c64224d349a935ab5039aa360942a48",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/serde_core/1.0.229/download"],
@@ -947,7 +947,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__serde_derive-1.0.229",
+        name = "rbd__serde_derive-1.0.229",
         sha256 = "e7a5d71263a5a7d47b41f6b3f06ba276f10cc18b0931f1799f710578e2309348",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/serde_derive/1.0.229/download"],
@@ -957,7 +957,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__serde_json-1.0.154",
+        name = "rbd__serde_json-1.0.154",
         sha256 = "e7e9cc8b1b85264074fbcc02a88680c4096b1e47df8f739dceb03bf482f04bd6",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/serde_json/1.0.154/download"],
@@ -967,7 +967,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__simdutf8-0.1.5",
+        name = "rbd__simdutf8-0.1.5",
         sha256 = "e3a9fe34e3e7a50316060351f37187a3f546bce95496156754b601a5fa71b76e",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/simdutf8/0.1.5/download"],
@@ -977,7 +977,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__slab-0.4.12",
+        name = "rbd__slab-0.4.12",
         sha256 = "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/slab/0.4.12/download"],
@@ -987,7 +987,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__smoothutf8-0.2.3",
+        name = "rbd__smoothutf8-0.2.3",
         sha256 = "6b4ec95892483d6d94284caccfddb9b77111a4dcac33ed25d624248def0fa5f1",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/smoothutf8/0.2.3/download"],
@@ -997,7 +997,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__syn-2.0.119",
+        name = "rbd__syn-2.0.119",
         sha256 = "872831b642d1a07999a962a351ed35b955ea2cfc8f3862091e2a240a84f17297",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/syn/2.0.119/download"],
@@ -1007,7 +1007,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__syn-3.0.10",
+        name = "rbd__syn-3.0.10",
         sha256 = "4ae9ccbea3a7b0b09443036490c8f34a8b1b760fd345e5c0dae0aac718faea79",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/syn/3.0.10/download"],
@@ -1017,7 +1017,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__sync_wrapper-1.0.2",
+        name = "rbd__sync_wrapper-1.0.2",
         sha256 = "0bf256ce5efdfa370213c1dabab5935a12e49f2c58d15e9eac2870d3b4f27263",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/sync_wrapper/1.0.2/download"],
@@ -1027,7 +1027,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__thiserror-2.0.21",
+        name = "rbd__thiserror-2.0.21",
         sha256 = "09e52cb86a36cede5cb101bf8908837b3e4c6e5e59fe7fd85c23fb56200d189e",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/thiserror/2.0.21/download"],
@@ -1037,7 +1037,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__thiserror-impl-2.0.21",
+        name = "rbd__thiserror-impl-2.0.21",
         sha256 = "fe5197923287db20a58125f0bc85c062f7f2c892de97b18c356f9efb14b28524",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/thiserror-impl/2.0.21/download"],
@@ -1047,7 +1047,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tokio-1.54.1",
+        name = "rbd__tokio-1.54.1",
         sha256 = "b52fd3255258d26fac7264ab5a76b53c13367136dc011d3d6ad4f8ed070396a3",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tokio/1.54.1/download"],
@@ -1057,7 +1057,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tokio-macros-2.7.2",
+        name = "rbd__tokio-macros-2.7.2",
         sha256 = "78773a2a397f451582ce068015985c33193cf6dea8b74d2a639fe457b2f07b0e",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tokio-macros/2.7.2/download"],
@@ -1067,7 +1067,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tokio-util-0.7.20",
+        name = "rbd__tokio-util-0.7.20",
         sha256 = "e464cf451ba96ebfc6f9b6542f17ee8b8956e33f1e40d9690624e59d7a7f8a4b",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tokio-util/0.7.20/download"],
@@ -1077,7 +1077,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tower-0.5.3",
+        name = "rbd__tower-0.5.3",
         sha256 = "ebe5ef63511595f1344e2d5cfa636d973292adc0eec1f0ad45fae9f0851ab1d4",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tower/0.5.3/download"],
@@ -1087,7 +1087,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tower-layer-0.3.3",
+        name = "rbd__tower-layer-0.3.3",
         sha256 = "121c2a6cda46980bb0fcd1647ffaf6cd3fc79a013de288782836f6df9c48780e",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tower-layer/0.3.3/download"],
@@ -1097,7 +1097,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tower-service-0.3.3",
+        name = "rbd__tower-service-0.3.3",
         sha256 = "8df9b6e13f2d32c91b9bd719c00d1958837bc7dec474d94952798cc8e69eeec3",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tower-service/0.3.3/download"],
@@ -1107,7 +1107,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tracing-0.1.44",
+        name = "rbd__tracing-0.1.44",
         sha256 = "63e71662fa4b2a2c3a26f570f037eb95bb1f85397f3cd8076caed2f026a6d100",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tracing/0.1.44/download"],
@@ -1117,7 +1117,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tracing-attributes-0.1.31",
+        name = "rbd__tracing-attributes-0.1.31",
         sha256 = "7490cfa5ec963746568740651ac6781f701c9c5ea257c58e057f3ba8cf69e8da",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tracing-attributes/0.1.31/download"],
@@ -1127,7 +1127,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__tracing-core-0.1.36",
+        name = "rbd__tracing-core-0.1.36",
         sha256 = "db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/tracing-core/0.1.36/download"],
@@ -1137,7 +1137,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__unicode-ident-1.0.27",
+        name = "rbd__unicode-ident-1.0.27",
         sha256 = "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/unicode-ident/1.0.27/download"],
@@ -1147,7 +1147,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__wasm-bindgen-0.2.130",
+        name = "rbd__wasm-bindgen-0.2.130",
         sha256 = "a0181c14ddd6c7b8b0b0132a5f1ea2f32be0d893cd3ea97b6e3b28886b8a3d1c",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/wasm-bindgen/0.2.130/download"],
@@ -1157,7 +1157,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__wasm-bindgen-futures-0.4.80",
+        name = "rbd__wasm-bindgen-futures-0.4.80",
         sha256 = "5e14e0327cb5368ad60ccb22d04a9827a693c95a926d8d125e9fa39e0baec501",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/wasm-bindgen-futures/0.4.80/download"],
@@ -1167,7 +1167,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__wasm-bindgen-macro-0.2.130",
+        name = "rbd__wasm-bindgen-macro-0.2.130",
         sha256 = "6e931a02a39abdbf66966fc35902b5ed58344750a70885bed4ebb3d8eaf28ed9",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/wasm-bindgen-macro/0.2.130/download"],
@@ -1177,7 +1177,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__wasm-bindgen-macro-support-0.2.130",
+        name = "rbd__wasm-bindgen-macro-support-0.2.130",
         sha256 = "2ca4b54280e455bd831e33a6b8e734baf432fe63fbc35c42ac14ce67a043a53a",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/wasm-bindgen-macro-support/0.2.130/download"],
@@ -1187,7 +1187,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__wasm-bindgen-shared-0.2.130",
+        name = "rbd__wasm-bindgen-shared-0.2.130",
         sha256 = "3b1f9c3798725016c6ee5f2f57869ec0831e8bbc0ab0310a86e787e97f41389e",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/wasm-bindgen-shared/0.2.130/download"],
@@ -1197,7 +1197,7 @@ def crate_repositories():
 
     maybe(
         http_archive,
-        name = "rrbd__zmij-1.0.23",
+        name = "rbd__zmij-1.0.23",
         sha256 = "29666d0abbfad1e3dc4dcf6144730dd3a3ab225bbbdac83319345b1b44ccfc1b",
         type = "tar.gz",
         urls = ["https://static.crates.io/crates/zmij/1.0.23/download"],
@@ -1206,13 +1206,13 @@ def crate_repositories():
     )
 
     return [
-        struct(repo = "rrbd", is_dev_dep = False),
-        struct(repo = "rrbd__buffa-0.9.2", is_dev_dep = False),
-        struct(repo = "rrbd__buffa-codegen-0.9.2", is_dev_dep = False),
-        struct(repo = "rrbd__buffa-descriptor-0.9.2", is_dev_dep = False),
-        struct(repo = "rrbd__buffa-types-0.9.2", is_dev_dep = False),
-        struct(repo = "rrbd__connectrpc-0.9.1", is_dev_dep = False),
-        struct(repo = "rrbd__connectrpc-codegen-0.9.0", is_dev_dep = False),
-        struct(repo = "rrbd__futures-0.3.34", is_dev_dep = False),
-        struct(repo = "rrbd__serde-1.0.229", is_dev_dep = False),
+        struct(repo = "rbd", is_dev_dep = False),
+        struct(repo = "rbd__buffa-0.9.2", is_dev_dep = False),
+        struct(repo = "rbd__buffa-codegen-0.9.2", is_dev_dep = False),
+        struct(repo = "rbd__buffa-descriptor-0.9.2", is_dev_dep = False),
+        struct(repo = "rbd__buffa-types-0.9.2", is_dev_dep = False),
+        struct(repo = "rbd__connectrpc-0.9.1", is_dev_dep = False),
+        struct(repo = "rbd__connectrpc-codegen-0.9.0", is_dev_dep = False),
+        struct(repo = "rbd__futures-0.3.34", is_dev_dep = False),
+        struct(repo = "rbd__serde-1.0.229", is_dev_dep = False),
     ]

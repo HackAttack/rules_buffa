@@ -112,8 +112,8 @@ rust_library(
     }),
     version = "0.3.34",
     deps = [
-        "@rrbd__futures-core-0.3.34//:futures_core",
-        "@rrbd__futures-task-0.3.34//:futures_task",
-        "@rrbd__futures-util-0.3.34//:futures_util",
+        "@rbd__futures-core-0.3.34//:futures_core",
+        "@rbd__futures-task-0.3.34//:futures_task",
+        "@rbd__futures-util-0.3.34//:futures_util",
     ],
 )

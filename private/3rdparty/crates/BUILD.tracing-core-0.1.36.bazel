@@ -113,6 +113,6 @@ rust_library(
     }),
     version = "0.1.36",
     deps = [
-        "@rrbd__once_cell-1.21.4//:once_cell",
+        "@rbd__once_cell-1.21.4//:once_cell",
     ],
 )

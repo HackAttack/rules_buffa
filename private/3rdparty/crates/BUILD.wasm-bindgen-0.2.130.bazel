@@ -44,7 +44,7 @@ rust_library(
     crate_root = "src/lib.rs",
     edition = "2021",
     proc_macro_deps = [
-        "@rrbd__wasm-bindgen-macro-0.2.130//:wasm_bindgen_macro",
+        "@rbd__wasm-bindgen-macro-0.2.130//:wasm_bindgen_macro",
     ],
     rustc_env_files = [
         ":cargo_toml_env_vars",
@@ -120,8 +120,8 @@ rust_library(
     version = "0.2.130",
     deps = [
         ":build_script_build",
-        "@rrbd__cfg-if-1.0.5//:cfg_if",
-        "@rrbd__wasm-bindgen-shared-0.2.130//:wasm_bindgen_shared",
+        "@rbd__cfg-if-1.0.5//:cfg_if",
+        "@rbd__wasm-bindgen-shared-0.2.130//:wasm_bindgen_shared",
     ],
 )
 
@@ -132,7 +132,7 @@ cargo_build_script(
         allow_empty = True,
     ),
     aliases = {
-        "@rrbd__rustversion-1.0.23//:rustversion": "rustversion_compat",
+        "@rbd__rustversion-1.0.23//:rustversion": "rustversion_compat",
     },
     build_script_env_files = [
         ":cargo_toml_env_vars",
@@ -170,11 +170,11 @@ cargo_build_script(
     edition = "2021",
     emit_warnings = False,
     link_deps = [
-        "@rrbd__wasm-bindgen-shared-0.2.130//:wasm_bindgen_shared",
+        "@rbd__wasm-bindgen-shared-0.2.130//:wasm_bindgen_shared",
     ],
     pkg_name = "wasm-bindgen",
     proc_macro_deps = [
-        "@rrbd__rustversion-1.0.23//:rustversion",
+        "@rbd__rustversion-1.0.23//:rustversion",
     ],
     rustc_env_files = [
         ":cargo_toml_env_vars",

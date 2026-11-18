@@ -113,7 +113,7 @@ rust_library(
     }),
     version = "0.15.5",
     deps = [
-        "@rrbd__foldhash-0.1.5//:foldhash",
-        "@rrbd__serde-1.0.229//:serde",
+        "@rbd__foldhash-0.1.5//:foldhash",
+        "@rbd__serde-1.0.229//:serde",
     ],
 )

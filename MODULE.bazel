@@ -1,8 +1,8 @@
-"""bazelbuild/rules_rust/extensions/buffa"""
+"""Bazel rules for building protos in Rust with buffa"""
 
 module(
-    name = "rules_rust_buffa",
-    version = "0.75.0",
+    name = "rules_buffa",
+    version = "0.0.0",
 )
 
 bazel_dep(name = "rules_rust", version = "0.75.0")
@@ -17,15 +17,15 @@ bazel_dep(name = "googleapis", version = "0.0.0-20241220-5e258e33.bcr.1", dev_de
 rust_ext = use_extension("//:extensions.bzl", "rust_ext")
 use_repo(
     rust_ext,
-    "rrbd",
-    "rrbd__buffa-0.9.2",
-    "rrbd__buffa-codegen-0.9.2",
-    "rrbd__buffa-descriptor-0.9.2",
-    "rrbd__buffa-types-0.9.2",
-    "rrbd__connectrpc-0.9.1",
-    "rrbd__connectrpc-codegen-0.9.0",
-    "rrbd__futures-0.3.34",
-    "rrbd__serde-1.0.229",
+    "rbd",
+    "rbd__buffa-0.9.2",
+    "rbd__buffa-codegen-0.9.2",
+    "rbd__buffa-descriptor-0.9.2",
+    "rbd__buffa-types-0.9.2",
+    "rbd__connectrpc-0.9.1",
+    "rbd__connectrpc-codegen-0.9.0",
+    "rbd__futures-0.3.34",
+    "rbd__serde-1.0.229",
 )
 
 register_toolchains(

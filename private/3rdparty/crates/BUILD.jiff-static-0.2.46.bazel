@@ -23,7 +23,7 @@ rust_proc_macro(
         allow_empty = True,
     ),
     aliases = {
-        "@rrbd__jiff-core-0.1.8//:jiff_core": "jcore",
+        "@rbd__jiff-core-0.1.8//:jiff_core": "jcore",
     },
     compile_data = glob(
         include = ["**"],
@@ -112,9 +112,9 @@ rust_proc_macro(
     }),
     version = "0.2.46",
     deps = [
-        "@rrbd__jiff-core-0.1.8//:jiff_core",
-        "@rrbd__proc-macro2-1.0.107//:proc_macro2",
-        "@rrbd__quote-1.0.47//:quote",
-        "@rrbd__syn-2.0.119//:syn",
+        "@rbd__jiff-core-0.1.8//:jiff_core",
+        "@rbd__proc-macro2-1.0.107//:proc_macro2",
+        "@rbd__quote-1.0.47//:quote",
+        "@rbd__syn-2.0.119//:syn",
     ],
 )

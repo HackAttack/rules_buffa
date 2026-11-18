@@ -114,8 +114,8 @@ rust_library(
     version = "0.2.37",
     deps = [
         ":build_script_build",
-        "@rrbd__proc-macro2-1.0.107//:proc_macro2",
-        "@rrbd__syn-2.0.119//:syn",
+        "@rbd__proc-macro2-1.0.107//:proc_macro2",
+        "@rbd__syn-2.0.119//:syn",
     ],
 )
 

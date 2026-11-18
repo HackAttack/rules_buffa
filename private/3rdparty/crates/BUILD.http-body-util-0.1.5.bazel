@@ -112,10 +112,10 @@ rust_library(
     }),
     version = "0.1.5",
     deps = [
-        "@rrbd__bytes-1.12.1//:bytes",
-        "@rrbd__futures-core-0.3.34//:futures_core",
-        "@rrbd__http-1.5.0//:http",
-        "@rrbd__http-body-1.1.0//:http_body",
-        "@rrbd__pin-project-lite-0.2.17//:pin_project_lite",
+        "@rbd__bytes-1.12.1//:bytes",
+        "@rbd__futures-core-0.3.34//:futures_core",
+        "@rbd__http-1.5.0//:http",
+        "@rbd__http-body-1.1.0//:http_body",
+        "@rbd__pin-project-lite-0.2.17//:pin_project_lite",
     ],
 )

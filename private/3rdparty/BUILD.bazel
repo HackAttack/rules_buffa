@@ -45,8 +45,8 @@ crates_vendor(
         ),
     },
     # Shorten the repository name to avoid MAX_PATH issues on Windows
-    # `rules_rust_buffa_deps` == `rrbd`
-    repository_name = "rrbd",
+    # `rules_buffa_deps` == `rbd`
+    repository_name = "rbd",
     tags = ["manual"],
 )
 

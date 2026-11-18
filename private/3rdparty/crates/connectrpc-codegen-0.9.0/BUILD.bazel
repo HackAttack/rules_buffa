@@ -10,6 +10,6 @@ package(default_visibility = ["//visibility:public"])
 
 alias(
     name = "connectrpc-codegen-0.9.0",
-    actual = "@rrbd__connectrpc-codegen-0.9.0//:connectrpc_codegen",
+    actual = "@rbd__connectrpc-codegen-0.9.0//:connectrpc_codegen",
     tags = ["manual"],
 )

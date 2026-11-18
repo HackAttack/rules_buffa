@@ -113,7 +113,7 @@ rust_library(
     }),
     version = "0.4.80",
     deps = [
-        "@rrbd__js-sys-0.3.107//:js_sys",
-        "@rrbd__wasm-bindgen-0.2.130//:wasm_bindgen",
+        "@rbd__js-sys-0.3.107//:js_sys",
+        "@rbd__wasm-bindgen-0.2.130//:wasm_bindgen",
     ],
 )

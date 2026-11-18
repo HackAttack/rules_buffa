@@ -1,4 +1,4 @@
-"""# rules_rust_buffa
+"""# rules_buffa
 
 These build rules are used for building [protobufs][protobuf] in [Rust][rust] with Bazel
 using [buffa][buffa]
@@ -16,7 +16,7 @@ using [buffa][buffa]
 ## Setup
 
 ```python
-bazel_dep(name = "rules_rust_buffa", version = "{SEE_RELEASE_NOTES}")
+bazel_dep(name = "rules_buffa", version = "{SEE_RELEASE_NOTES}")
 ```
 
 Each `proto_library` is compiled into one Rust crate which can be consumed like
@@ -24,7 +24,7 @@ any other Rust dependency.
 
 ```python
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_rust_buffa//:defs.bzl", "rust_buffa_library")
+load("@rules_buffa//:defs.bzl", "rust_buffa_library")
 
 proto_library(
     name = "my_proto",
@@ -58,11 +58,11 @@ codegen binary from the source exported by this module and declare a
 
 ```python
 load("@rules_rust//rust:defs.bzl", "rust_binary")
-load("@rules_rust_buffa//:defs.bzl", "rust_buffa_toolchain")
+load("@rules_buffa//:defs.bzl", "rust_buffa_toolchain")
 
 rust_binary(
     name = "codegen",
-    srcs = ["@rules_rust_buffa//private:codegen.rs"],
+    srcs = ["@rules_buffa//private:codegen.rs"],
     edition = "2021",
     deps = [
         "@crates//:buffa",
@@ -85,7 +85,7 @@ rust_buffa_toolchain(
 toolchain(
     name = "buffa_toolchain",
     toolchain = ":buffa_toolchain_impl",
-    toolchain_type = "@rules_rust_buffa//:toolchain_type",
+    toolchain_type = "@rules_buffa//:toolchain_type",
 )
 ```
 
@@ -196,7 +196,7 @@ and gRPC-Web protocols.
 [connectrpc]: https://github.com/connectrpc/connect-rust
 
 ```python
-register_toolchains("@rules_rust_buffa//:connect_buffa_toolchain")
+register_toolchains("@rules_buffa//:connect_buffa_toolchain")
 ```
 
 Every `proto_library` crate then also gets a `<Service>` trait and
@@ -219,7 +219,7 @@ exported source with the `connect` crate feature and add `connectrpc-codegen`:
 ```python
 rust_binary(
     name = "connect_codegen",
-    srcs = ["@rules_rust_buffa//private:codegen.rs"],
+    srcs = ["@rules_buffa//private:codegen.rs"],
     crate_features = ["connect"],
     edition = "2021",
     deps = [

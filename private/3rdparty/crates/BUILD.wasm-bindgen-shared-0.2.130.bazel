@@ -114,7 +114,7 @@ rust_library(
     version = "0.2.130",
     deps = [
         ":build_script_build",
-        "@rrbd__unicode-ident-1.0.27//:unicode_ident",
+        "@rbd__unicode-ident-1.0.27//:unicode_ident",
     ],
 )
 

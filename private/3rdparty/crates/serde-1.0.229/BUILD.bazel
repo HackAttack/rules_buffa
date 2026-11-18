@@ -10,6 +10,6 @@ package(default_visibility = ["//visibility:public"])
 
 alias(
     name = "serde-1.0.229",
-    actual = "@rrbd__serde-1.0.229//:serde",
+    actual = "@rbd__serde-1.0.229//:serde",
     tags = ["manual"],
 )

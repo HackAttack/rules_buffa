@@ -44,7 +44,7 @@ rust_library(
     crate_root = "src/lib.rs",
     edition = "2021",
     proc_macro_deps = [
-        "@rrbd__rustversion-1.0.23//:rustversion",
+        "@rbd__rustversion-1.0.23//:rustversion",
     ],
     rustc_env_files = [
         ":cargo_toml_env_vars",
@@ -119,8 +119,8 @@ rust_library(
     }),
     version = "0.9.2",
     deps = [
-        "@rrbd__buffa-0.9.2//:buffa",
-        "@rrbd__serde-1.0.229//:serde",
-        "@rrbd__serde_json-1.0.154//:serde_json",
+        "@rbd__buffa-0.9.2//:buffa",
+        "@rbd__serde-1.0.229//:serde",
+        "@rbd__serde_json-1.0.154//:serde_json",
     ],
 )

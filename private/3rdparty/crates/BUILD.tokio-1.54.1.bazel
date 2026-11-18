@@ -47,7 +47,7 @@ rust_library(
     crate_root = "src/lib.rs",
     edition = "2021",
     proc_macro_deps = [
-        "@rrbd__tokio-macros-2.7.2//:tokio_macros",
+        "@rbd__tokio-macros-2.7.2//:tokio_macros",
     ],
     rustc_env_files = [
         ":cargo_toml_env_vars",
@@ -122,7 +122,7 @@ rust_library(
     }),
     version = "1.54.1",
     deps = [
-        "@rrbd__bytes-1.12.1//:bytes",
-        "@rrbd__pin-project-lite-0.2.17//:pin_project_lite",
+        "@rbd__bytes-1.12.1//:bytes",
+        "@rbd__pin-project-lite-0.2.17//:pin_project_lite",
     ],
 )

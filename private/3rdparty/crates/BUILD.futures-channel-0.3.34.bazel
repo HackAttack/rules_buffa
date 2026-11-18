@@ -115,7 +115,7 @@ rust_library(
     }),
     version = "0.3.34",
     deps = [
-        "@rrbd__futures-core-0.3.34//:futures_core",
-        "@rrbd__futures-sink-0.3.34//:futures_sink",
+        "@rbd__futures-core-0.3.34//:futures_core",
+        "@rbd__futures-sink-0.3.34//:futures_sink",
     ],
 )

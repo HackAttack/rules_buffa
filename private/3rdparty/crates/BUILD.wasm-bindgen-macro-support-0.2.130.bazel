@@ -109,10 +109,10 @@ rust_library(
     }),
     version = "0.2.130",
     deps = [
-        "@rrbd__bumpalo-3.20.4//:bumpalo",
-        "@rrbd__proc-macro2-1.0.107//:proc_macro2",
-        "@rrbd__quote-1.0.47//:quote",
-        "@rrbd__syn-3.0.10//:syn",
-        "@rrbd__wasm-bindgen-shared-0.2.130//:wasm_bindgen_shared",
+        "@rbd__bumpalo-3.20.4//:bumpalo",
+        "@rbd__proc-macro2-1.0.107//:proc_macro2",
+        "@rbd__quote-1.0.47//:quote",
+        "@rbd__syn-3.0.10//:syn",
+        "@rbd__wasm-bindgen-shared-0.2.130//:wasm_bindgen_shared",
     ],
 )

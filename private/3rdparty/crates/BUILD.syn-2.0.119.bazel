@@ -184,8 +184,8 @@ rust_library(
     }),
     version = "2.0.119",
     deps = [
-        "@rrbd__proc-macro2-1.0.107//:proc_macro2",
-        "@rrbd__quote-1.0.47//:quote",
-        "@rrbd__unicode-ident-1.0.27//:unicode_ident",
+        "@rbd__proc-macro2-1.0.107//:proc_macro2",
+        "@rbd__quote-1.0.47//:quote",
+        "@rbd__unicode-ident-1.0.27//:unicode_ident",
     ],
 )

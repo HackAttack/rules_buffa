@@ -10,6 +10,6 @@ package(default_visibility = ["//visibility:public"])
 
 alias(
     name = "connectrpc",
-    actual = "@rrbd__connectrpc-0.9.1//:connectrpc",
+    actual = "@rbd__connectrpc-0.9.1//:connectrpc",
     tags = ["manual"],
 )
