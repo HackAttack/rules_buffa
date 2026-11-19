@@ -439,15 +439,25 @@ def _rust_buffa_toolchain_impl(ctx):
         ],
     )]
 
+# `arbitrary` and `serde` are named by the code `arbitrary=true` and
+# `json=true` generate.
+_DEFAULT_RUNTIME = [
+    Label("//private/3rdparty/crates:arbitrary"),
+    Label("//private/3rdparty/crates:buffa"),
+    Label("//private/3rdparty/crates:buffa-descriptor"),
+    Label("//private/3rdparty/crates:buffa-types"),
+    Label("//private/3rdparty/crates:serde"),
+]
+
 rust_buffa_toolchain = rule(
     implementation = _rust_buffa_toolchain_impl,
     doc = "Rust buffa toolchain rule.",
     attrs = {
         "codegen": attr.label(
-            doc = "The buffa codegen binary to invoke.",
+            doc = "The buffa codegen binary to invoke. Defaults to this module's `@rules_buffa//:codegen`, which generates code for this module's runtime crates.",
             cfg = "exec",
+            default = Label("//:codegen"),
             executable = True,
-            mandatory = True,
         ),
         "crate_features": attr.string_list(
             doc = "Crate features enabled on every generated crate, needed by codegen options that gate generated code on crate features: `arbitrary=true` always emits `#[cfg_attr(feature = \"arbitrary\", ...)]`, and `gate_impls=true` gates the `json`, `views`, `text`, and `reflect` impls on the corresponding `*_feature` names.",
@@ -460,10 +470,10 @@ rust_buffa_toolchain = rule(
             doc = "Codegen options as `key=value`, e.g. `json=true`. See the `rules_buffa` module documentation for the supported keys.",
         ),
         "runtime": attr.label_list(
-            doc = "The crates generated code links against, normally `buffa`, `buffa-types`, and `buffa-descriptor`.",
+            doc = "The crates generated code links against, normally `buffa`, `buffa-types`, and `buffa-descriptor`. Defaults to this module's `buffa`, `buffa-types`, `buffa-descriptor`, `serde`, and `arbitrary`, which support every codegen option.",
             providers = [rust_common.crate_info],
             aspects = [rust_analyzer_aspect],
-            mandatory = True,
+            default = _DEFAULT_RUNTIME,
         ),
     },
 )

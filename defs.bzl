@@ -48,6 +48,28 @@ traits match: `@rules_buffa//:buffa`, `:buffa-types`, `:buffa-descriptor`,
 
 For additional information about Bazel toolchains, see [here](https://docs.bazel.build/versions/master/toolchains.html).
 
+#### <a name="codegen-options">Codegen Options
+
+The default toolchain uses buffa's default codegen options. To change them,
+declare a `rust_buffa_toolchain` with only `opts`: `codegen` and `runtime`
+default to this module's generator and runtime crates, the same ones the
+default toolchain uses.
+
+```python
+load("@rules_buffa//:defs.bzl", "rust_buffa_toolchain")
+
+rust_buffa_toolchain(
+    name = "buffa_toolchain_impl",
+    opts = ["reflection=true"],
+)
+
+toolchain(
+    name = "buffa_toolchain",
+    toolchain = ":buffa_toolchain_impl",
+    toolchain_type = "@rules_buffa//:toolchain_type",
+)
+```
+
 #### <a name="custom-buffa-deps">Customizing `buffa` Dependencies
 
 The default toolchain uses the [`buffa`], [`buffa-types`], [`buffa-descriptor`], and
@@ -56,7 +78,7 @@ codegen binary from `@rules_buffa//:codegen.rs` and declare a
 `rust_buffa_toolchain` with your own crates (e.g. from a
 [crate_universe](https://bazelbuild.github.io/rules_rust/crate_universe.html) repository).
 If your runtime crates are the same buffa version as this module's
-`buffa-codegen` (0.9.2), `codegen = "@rules_buffa//:codegen"` also works.
+`buffa-codegen` (0.9.2), you can leave `codegen` at its default.
 
 [`buffa`]: https://crates.io/crates/buffa
 [`buffa-types`]: https://crates.io/crates/buffa-types
@@ -140,11 +162,11 @@ generated code on crate features: `arbitrary=true` is always gated, and
 `exclude_package` and `file_per_package` do not apply: each `proto_library`
 generates only its own files, into one crate root.
 
-The default toolchain supports every option: its vendored `buffa`,
+The default `runtime` supports every option: its vendored `buffa`,
 `buffa-types`, and `buffa-descriptor` enable every feature, including the
-`jiff` and `chrono` conversions in `buffa-types`, and its `runtime` includes
-`serde` and `arbitrary`. A custom toolchain needs matching features on its own
-`runtime` crates:
+`jiff` and `chrono` conversions in `buffa-types`, and it includes `serde` and
+`arbitrary`. A toolchain with its own `runtime` crates needs matching
+features on them:
 
 - `json`: `json` on `buffa`, `buffa-types`, and `buffa-descriptor`, plus
   `serde` in `runtime`.
