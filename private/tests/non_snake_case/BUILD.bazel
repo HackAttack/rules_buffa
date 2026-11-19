@@ -28,9 +28,10 @@ rust_test(
     data = [":lint_names_src"],
     edition = "2021",
     env = {
-        "BUFFA_SRC": "$(rootpath :lint_names_src)",
+        "BUFFA_SRC": "$(rlocationpath :lint_names_src)",
     },
     deps = [
         ":lint_names_rs_buffa",
+        "@rules_rust//rust/runfiles",
     ],
 )

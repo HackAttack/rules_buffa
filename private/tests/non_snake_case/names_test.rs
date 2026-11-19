@@ -12,6 +12,8 @@ fn pose_field() {
 
 #[test]
 fn buffa_srcs_output_group() {
-    let src = std::fs::read_to_string(std::env::var("BUFFA_SRC").unwrap()).unwrap();
+    let r = runfiles::Runfiles::create().unwrap();
+    let path = runfiles::rlocation!(r, std::env::var("BUFFA_SRC").unwrap()).unwrap();
+    let src = std::fs::read_to_string(path).unwrap();
     assert!(src.contains("pub struct Pose"));
 }
